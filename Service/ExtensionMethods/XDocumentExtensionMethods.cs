@@ -13,11 +13,12 @@ public static class XDocumentExtensionMethods
 
     public static string GetVedtakTitle(this XDocument xDocument)
     {
-        var titleElement = xDocument.XPathSelectElement("//beslo/vedtak/tit[2]");
+        var titleElement = xDocument.XPathSelectElement("//Innstilling/Sluttseksjon/VedtakTilLov/OmLoven/A");
         if (titleElement == null)
             throw new ArgumentException("Unable to fetch vedtak title");
 
-        return titleElement.Value;
+
+        return titleElement.Value.Replace("\n", " ");
     }
 
     public static List<string> GetPublicationIds(this XDocument xDocument)
@@ -30,7 +31,8 @@ public static class XDocumentExtensionMethods
 
         namespaceManager.AddNamespace(nsPrefix, rootNamespace.NamespaceName);
         var publicationElements =
-            xDocument.XPathSelectElements($"//{nsPrefix}:publikasjoner_oversikt/{nsPrefix}:publikasjoner_liste/{nsPrefix}:publikasjon/{nsPrefix}:id", namespaceManager);
+            xDocument
+                .XPathSelectElements($"//{nsPrefix}:publikasjoner_oversikt/{nsPrefix}:publikasjoner_liste/{nsPrefix}:publikasjon/{nsPrefix}:id", namespaceManager);
 
         return publicationElements.Select(r => r.Value).ToList();
     }
