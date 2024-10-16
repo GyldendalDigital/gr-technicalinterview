@@ -6,11 +6,6 @@ namespace Service.ExtensionMethods;
 
 public static class XDocumentExtensionMethods
 {
-    public static XDocument ToXDocument(this string xmlString)
-    {
-        return XDocument.Parse(xmlString);
-    }
-
     public static string GetVedtakTitle(this XDocument xDocument)
     {
         var titleElement = xDocument.XPathSelectElement("//Innstilling/Sluttseksjon/VedtakTilLov/OmLoven/A");

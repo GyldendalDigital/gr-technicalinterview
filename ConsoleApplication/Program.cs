@@ -4,17 +4,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Service;
 
 var serviceCollection = new ServiceCollection();
-serviceCollection.AddHttpClient<IStortingetService, StortingetService>(client =>
+serviceCollection.AddHttpClient<IStortingetApiClient, StortingetApiClient>(client =>
 {
     client.BaseAddress = new Uri("https://data.stortinget.no/eksport/");
 });
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
-var stortingetService = serviceProvider.GetRequiredService<IStortingetService>();
+var stortingetApiClient = serviceProvider.GetRequiredService<IStortingetApiClient>();
 
-//TODO: fetch all vedtak titles from all publication in a given session, for instance
-//Example session id to use: 2023-2024, fetch the 10 earliest vedtakId 
-
-var vedtakTitle = stortingetService.GetVedtakTitle("vedtak-202324-001");
+var vedtakTitle = stortingetApiClient.GetVedtakTitle("vedtak-202324-001");
 Console.WriteLine(vedtakTitle);
+
+// TODO:
+// 1. Implement StortingVedtakService and write result to console.
+// 2. Write a unit test for the class.
+//
+// Example session id to use: 2023-2024
