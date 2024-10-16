@@ -6,7 +6,7 @@ namespace UnitTests;
 [TestClass]
 public class XDocumentExtensionMethodsTests
 {
-    const string vedtakXml =
+    const string PublicationXml =
 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
 "<!DOCTYPE Innstilling PUBLIC \"Stortinget 2016 Ny dokumentstruktur\" \"https://www.stortinget.no/dtd/innstillinger.dtd\">" +
 "<Innstilling Status=\"Komplett\">" +
@@ -21,7 +21,7 @@ public class XDocumentExtensionMethodsTests
     "<Sign/>" +
 "</Innstilling>";
 
-    const string publicationXml =
+    const string PublicationListXml =
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
 "<publikasjoner_oversikt xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://data.stortinget.no\">" +
     "<respons_dato_tid>2024-10-16T07:28:23.8013814+02:00</respons_dato_tid>" +
@@ -37,21 +37,21 @@ public class XDocumentExtensionMethodsTests
     "<sesjon_id>2023-2024</sesjon_id>" +
 "</publikasjoner_oversikt>";
 
-    private static readonly XDocument VedtakXDocument = XDocument.Parse(vedtakXml);
-    private static readonly XDocument PublicationXDocument = XDocument.Parse(publicationXml);
+    private static readonly XDocument PublicationXDocument = XDocument.Parse(PublicationXml);
+    private static readonly XDocument PublicationListXDocument = XDocument.Parse(PublicationListXml);
 
     [TestMethod]
-    public void GetVedtakTitle_Should_return_the_Vedtak_title()
+    public void GetPublicationTitle_Should_return_the_publication_title()
     {
-        var vedtakTitle = VedtakXDocument.GetVedtakTitle();
+        var publicationTitle = PublicationXDocument.GetPublicationTitle();
 
-        Assert.AreEqual("om endringer i lov om Statens pensjonskasse og enkelte andre lover (opphevelse av minstegrensen for rett til medlemskap)", vedtakTitle);
+        Assert.AreEqual("om endringer i lov om Statens pensjonskasse og enkelte andre lover (opphevelse av minstegrensen for rett til medlemskap)", publicationTitle);
     }
 
     [TestMethod]
     public void GetPublicationIds_Should_return_all_publication_ids()
     {
-        var publicationIds = PublicationXDocument.GetPublicationIds();
+        var publicationIds = PublicationListXDocument.GetPublicationIds();
 
         Assert.AreEqual(2, publicationIds.Count);
         Assert.AreEqual("vedtak-202324-001", publicationIds[0]);

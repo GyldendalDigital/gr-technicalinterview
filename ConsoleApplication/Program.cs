@@ -13,11 +13,11 @@ var serviceProvider = serviceCollection.BuildServiceProvider();
 
 var stortingetApiClient = serviceProvider.GetRequiredService<IStortingetApiClient>();
 
-var vedtakTitle = stortingetApiClient.GetVedtakTitle("vedtak-202324-001");
-Console.WriteLine(vedtakTitle);
+var publicationTitle = stortingetApiClient.GetPublicationTitle("vedtak-202324-001");
+Console.WriteLine(publicationTitle);
 
 // TODO:
-// 1. Implement StortingVedtakService and write result to console.
+// 1. Implement StortingPublicationService and write result to console.
 // 2. Write a unit test for the class.
 //
 // Example session id to use: 2023-2024

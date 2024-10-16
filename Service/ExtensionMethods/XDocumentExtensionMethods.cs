@@ -6,7 +6,7 @@ namespace Service.ExtensionMethods;
 
 public static class XDocumentExtensionMethods
 {
-    public static string GetVedtakTitle(this XDocument xDocument)
+    public static string GetPublicationTitle(this XDocument xDocument)
     {
         var titleElement = xDocument.XPathSelectElement("//Innstilling/Sluttseksjon/VedtakTilLov/OmLoven/A");
         if (titleElement == null)

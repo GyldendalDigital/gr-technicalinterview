@@ -5,19 +5,19 @@ namespace Service;
 
 public interface IStortingetApiClient
 {
-    public string GetVedtakTitle(string publicationId);
+    public string GetPublicationTitle(string publicationId);
     public Task<List<string>> GetPublicationIds(string sessionId);
 }
 
 public class StortingetApiClient(HttpClient httpClient) : IStortingetApiClient
 {
-    public string GetVedtakTitle(string publicationId)
+    public string GetPublicationTitle(string publicationId)
     {
         // TODO: This line is problematic. Why? Can you fix it?
         var publicationXml = httpClient.GetStringAsync($"publikasjon?publikasjonid={publicationId}").Result;
 
         var publication = XDocument.Parse(publicationXml);
-        return publication.GetVedtakTitle();
+        return publication.GetPublicationTitle();
     }
 
     public Task<List<string>> GetPublicationIds(string sessionId)
